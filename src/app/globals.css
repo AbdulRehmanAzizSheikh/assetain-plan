@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-primary-50: #e0f7ff;
+  --color-primary-100: #b3ecff;
+  --color-primary-200: #80e0ff;
+  --color-primary-300: #4dd4ff;
+  --color-primary-400: #1ac8ff;
+  --color-primary-500: #0099cc;
+  --color-primary-600: #007399;
+  --color-primary-700: #004d66;
+  --color-primary-800: #002733;
+  --color-primary-900: #001119;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}

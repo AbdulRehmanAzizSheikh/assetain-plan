@@ -1,0 +1,125 @@
+{
+  "hero": {
+    "title": "🚀 Assetain – Complete Startup Blueprint",
+    "subtitle": "A clean, structured, point-to-point plan for a universal asset-management SaaS platform that works for schools, hospitals, offices, and even whole countries."
+  },
+  "overview": {
+    "title": "Asset Management for Anything & Everywhere",
+    "subtitle": "From schools to hospitals, offices to entire countries – Assetain lets anyone report, track, and fix physical assets with a single click."
+  },
+  "about": {
+    "title": "📖 What This Site Is About",
+    "paragraphs": [
+      "This page is a blog-style overview of the Assetain platform. It explains the problem we solve, how the product works, the roles involved, and the roadmap we plan to follow.",
+      "Think of it as the \"About\" page for investors, partners, or future users who want a clear picture before the app itself is launched."
+    ]
+  },
+  "problem": {
+    "title": "❓ The Problem",
+    "items": [
+      "Assets (projectors, fans, water coolers, medical equipment…) break unexpectedly.",
+      "Reporting is manual: call the office, send an email, or write a request on paper.",
+      "Management struggles to know who is responsible, what the status is, and when it will be fixed.",
+      "Large organisations have dozens of locations; keeping track becomes chaotic."
+    ]
+  },
+  "solution": {
+    "title": "💡 Our Solution",
+    "paragraphs": [
+      "Assetain attaches a QR-code to every physical item. Anyone can scan the code (or manually type the asset ID), fill a short form describing the issue, and the system instantly creates a ticket.",
+      "The ticket is routed to the appropriate Supervisor / Manager, who assigns a Technician (plumber, electrician, IT-support, etc.). All updates are visible in real-time on a web dashboard.",
+      "The whole workflow lives in a single-page web app built with Tailwind CSS for a premium, responsive look."
+    ]
+  },
+  "features": {
+    "title": "✨ Core Features",
+    "items": [
+      { "title": "QR-code reporting", "desc": "Scan or type an asset ID, fill a brief issue form." },
+      { "title": "Role-based dashboards", "desc": "Admin, Supervisor, Technician, Reporter each see only what they need." },
+      { "title": "Live ticket status", "desc": "Open, In-Progress, Resolved, with timestamps." },
+      { "title": "Analytics (future)", "desc": "Failure frequency per asset, MTTR, heat-maps." },
+      { "title": "Multi-tenant ready", "desc": "Single-org MVP, later SaaS for many schools/hospitals." },
+      { "title": "Responsive design", "desc": "Works on desktop, tablet, and mobile browsers." }
+    ]
+  },
+  "overviewRoles": {
+    "title": "👥 Who Does What?",
+    "rows": [
+      { "role": "Admin", "permissions": "Create users, assign roles, edit asset catalogue, view all tickets." },
+      { "role": "Supervisor / Manager", "permissions": "See tickets for their department, assign technicians, add notes." },
+      { "role": "Technician", "permissions": "Receive assigned tickets, update status, add resolution details." },
+      { "role": "Reporter (any employee)", "permissions": "Scan QR / enter ID, describe problem, view own ticket history." }
+    ]
+  },
+  "roadmap": {
+    "title": "🗺️ Roadmap",
+    "items": [
+      "✅ MVP – client-side app with localStorage persistence (already built).",
+      "🔜 Phase 1 – Lightweight Node/Express backend + JSON file storage for multi-device sync.",
+      "🔜 Phase 2 – Replace JSON with Firebase / Supabase for real-time multi-tenant SaaS.",
+      "🔜 Phase 3 – Integrate html5-qrcode for camera-based scanning.",
+      "🔜 Phase 4 – Secure authentication (email + password or OAuth) and role-based API.",
+      "🔜 Phase 5 – Analytics dashboard & reporting for administrators."
+    ]
+  },
+  "joinUs": {
+    "title": "🤝 Join Us",
+    "text": "We are looking for early adopters, beta testers, and investors who share our vision of a fully managed physical-asset ecosystem.",
+    "cta": "Get in Touch",
+    "ctaHref": "mailto:hello@assetain.com"
+  },
+  "blueprintIntro": {
+    "title": "📋 Detailed Blueprint",
+    "subtitle": "Technical plan, roles, and workflows"
+  },
+  "coreConcept": {
+    "title": "1️⃣ Core Concept & Brand Terminology",
+    "platformName": "Assetain",
+    "hierarchy": "[ Assetain ] (Main Platform)\n     │\n     └── [ Your Company ] (e.g., SMIT, Ali Electronics, Beaconhouse)\n              │\n              └── [ Branches / Locations ] (e.g., Karachi Campus, Campus B)\n                       │\n                       └── [ Assets with QR Codes ] (e.g., AC, Projector, Water Cooler)",
+    "terminology": "We use the word Company because it feels professional and works for schools, hospitals, offices, and any organisation."
+  },
+  "onboarding": {
+    "title": "2️⃣ User Onboarding & Invitation Flow",
+    "steps": [
+      "Account Creation (The Start): User clicks \"Create Assetain\" → creates a Company. The first registrant becomes the Owner (Super Admin).",
+      "Invitation System (Email-Based): Owner/Admin can send an invitation link via email. The invited user lands with zero permissions (Guest).",
+      "Permission Assignment: Until the Owner/Admin/Manager assigns a role, the new user sees a blank dashboard and cannot perform any actions."
+    ]
+  },
+  "rbac": {
+    "title": "3️⃣ Role Hierarchy & Access Control (RBAC)",
+    "rows": [
+      { "role": "Owner (Creator/Boss)", "permissions": "Full platform control, add/remove Admins, manage subscription, direct DB changes." },
+      { "role": "Admin", "permissions": "Full access to all branches, can invite Managers & Technicians, but cannot add/remove other Admins." },
+      { "role": "Manager", "permissions": "Manage assigned branches, assets, and review issue reports. Can invite Technicians." },
+      { "role": "Technician", "permissions": "View only tasks assigned to them, update status, add resolution notes." },
+      { "role": "Guest / Unassigned", "permissions": "Newly invited user with no permissions until a role is granted." }
+    ]
+  },
+  "qrFlow": {
+    "title": "4️⃣ QR Scan & Issue Reporting Flow",
+    "scanning": "Anyone (visitor, student, employee) scans the QR code on an asset. No login required – the scan redirects to a simple web form.",
+    "optionsTitle": "Issue Reporting Form – Options under review:",
+    "options": [
+      "Option A (Super Simple): One-line text box describing the problem (e.g., \"AC not cooling\").",
+      "Option B (Rich & Detailed): Allows photo/video upload and optional contact number for location help."
+    ],
+    "routing": "Upon submission, the ticket is instantly pushed to the relevant Branch Manager's dashboard as a notification."
+  },
+  "resolution": {
+    "title": "5️⃣ Technician Assignment & Resolution Workflow",
+    "steps": [
+      "Manager/Admin reviews the incoming ticket.",
+      "Selects an appropriate Technician (plumber, electrician, IT-guy, etc.) and assigns the task.",
+      "Technician receives a notification, fixes the asset, and marks the ticket Resolved.",
+      "Manager and Owner automatically receive an update that the issue is closed."
+    ]
+  },
+  "nextSteps": {
+    "title": "🚀 Next Steps",
+    "text": "We have the core blueprint. Tell us what you'd like to flesh out next – UI details, API design, branding, or a sprint plan.",
+    "cta": "Let's Keep Building",
+    "ctaHref": "mailto:hello@assetain.com"
+  },
+  "extraSections": []
+}
