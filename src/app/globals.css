@@ -24,3 +24,13 @@ html {
 body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 0.7s linear infinite;
+}

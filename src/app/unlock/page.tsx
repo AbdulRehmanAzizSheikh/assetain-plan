@@ -2,12 +2,15 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import LoadingScreen from "@/components/LoadingScreen";
+import Spinner from "@/components/Spinner";
 
 export default function UnlockPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -22,15 +25,20 @@ export default function UnlockPage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Wrong code");
+        setLoading(false);
         return;
       }
+      setRedirecting(true);
       router.replace("/");
       router.refresh();
     } catch {
       setError("Something went wrong");
-    } finally {
       setLoading(false);
     }
+  }
+
+  if (redirecting) {
+    return <LoadingScreen message="Unlocking… opening site" />;
   }
 
   return (
@@ -54,7 +62,8 @@ export default function UnlockPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           autoFocus
-          className="mb-4 w-full rounded-lg border border-primary-300 bg-white px-4 py-3 text-gray-900 outline-none focus:border-primary-500 dark:border-primary-600 dark:bg-primary-900/50 dark:text-white"
+          disabled={loading}
+          className="mb-4 w-full rounded-lg border border-primary-300 bg-white px-4 py-3 text-gray-900 outline-none focus:border-primary-500 disabled:opacity-60 dark:border-primary-600 dark:bg-primary-900/50 dark:text-white"
           placeholder="Enter access code"
         />
         {error && (
@@ -63,9 +72,16 @@ export default function UnlockPage() {
         <button
           type="submit"
           disabled={loading || !password}
-          className="w-full rounded-lg bg-primary-600 py-3 font-medium text-white transition hover:bg-primary-500 disabled:opacity-50"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 py-3 font-medium text-white transition hover:bg-primary-500 disabled:opacity-50"
         >
-          {loading ? "Checking…" : "Unlock"}
+          {loading ? (
+            <>
+              <Spinner size="sm" className="text-white" />
+              Checking…
+            </>
+          ) : (
+            "Unlock"
+          )}
         </button>
       </form>
     </div>

@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SESSION_MAX_AGE_SEC } from "@/lib/auth-client";
+import LoadingScreen from "./LoadingScreen";
 
-async function logoutAndRedirect(router: ReturnType<typeof useRouter>) {
+async function logoutRequest() {
   try {
     await fetch("/api/auth/logout", { method: "POST" });
   } catch {
     /* ignore */
   }
-  router.replace("/unlock");
-  router.refresh();
 }
 
 async function refreshSession(): Promise<boolean> {
@@ -25,11 +24,21 @@ async function refreshSession(): Promise<boolean> {
 
 export default function SessionKeepAlive() {
   const router = useRouter();
+  const [locking, setLocking] = useState(false);
 
   useEffect(() => {
     let leaveTimer: ReturnType<typeof setTimeout> | null = null;
     let heartbeat: ReturnType<typeof setInterval> | null = null;
     let leftAt: number | null = null;
+    let cancelled = false;
+
+    const logoutAndRedirect = async () => {
+      if (cancelled) return;
+      setLocking(true);
+      await logoutRequest();
+      router.replace("/unlock");
+      router.refresh();
+    };
 
     const clearLeaveTimer = () => {
       if (leaveTimer) {
@@ -43,7 +52,7 @@ export default function SessionKeepAlive() {
       void refreshSession();
       heartbeat = setInterval(() => {
         void refreshSession().then((ok) => {
-          if (!ok) void logoutAndRedirect(router);
+          if (!ok) void logoutAndRedirect();
         });
       }, 20_000);
     };
@@ -60,7 +69,7 @@ export default function SessionKeepAlive() {
       stopHeartbeat();
       clearLeaveTimer();
       leaveTimer = setTimeout(() => {
-        void logoutAndRedirect(router);
+        void logoutAndRedirect();
       }, SESSION_MAX_AGE_SEC * 1000);
     };
 
@@ -68,7 +77,7 @@ export default function SessionKeepAlive() {
       clearLeaveTimer();
       if (leftAt && Date.now() - leftAt >= SESSION_MAX_AGE_SEC * 1000) {
         leftAt = null;
-        void logoutAndRedirect(router);
+        void logoutAndRedirect();
         return;
       }
       leftAt = null;
@@ -87,6 +96,7 @@ export default function SessionKeepAlive() {
     window.addEventListener("pagehide", onLeave);
 
     return () => {
+      cancelled = true;
       clearLeaveTimer();
       stopHeartbeat();
       document.removeEventListener("visibilitychange", onVisibility);
@@ -94,5 +104,6 @@ export default function SessionKeepAlive() {
     };
   }, [router]);
 
-  return null;
+  if (!locking) return null;
+  return <LoadingScreen message="Session expired — locking…" />;
 }
