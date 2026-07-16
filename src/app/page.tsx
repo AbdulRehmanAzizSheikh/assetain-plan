@@ -5,6 +5,7 @@ import PlanView from "@/components/PlanView";
 import SessionKeepAlive from "@/components/SessionKeepAlive";
 import { getPlanContent } from "@/lib/content";
 import { EMPTY_CONTENT } from "@/lib/empty-content";
+import { mongoEnvHint } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic";
 
@@ -12,12 +13,30 @@ export default async function Home() {
   let content = EMPTY_CONTENT;
   let loadError: string | null = null;
 
-  try {
-    content = await getPlanContent();
-  } catch (e) {
-    console.error(e);
-    loadError =
-      "MongoDB connect nahi hua. Atlas Network Access / URI check karo. Abhi page empty hai.";
+  const envHint = mongoEnvHint();
+  if (envHint) {
+    loadError = envHint;
+  } else {
+    try {
+      content = await getPlanContent();
+    } catch (e) {
+      console.error(e);
+      const msg = e instanceof Error ? e.message : String(e);
+      if (msg.includes("MONGODB_URI")) {
+        loadError = msg;
+      } else if (
+        msg.includes("ECONNREFUSED") ||
+        msg.includes("querySrv") ||
+        msg.includes("ENOTFOUND") ||
+        msg.includes("timed out") ||
+        msg.includes("Server selection")
+      ) {
+        loadError =
+          "MongoDB Atlas tak reach nahi ho raha. Atlas → Network Access → Add IP Address → Allow Access from Anywhere (0.0.0.0/0) karo, phir Vercel Redeploy.";
+      } else {
+        loadError = `MongoDB error: ${msg}`;
+      }
+    }
   }
 
   return (
