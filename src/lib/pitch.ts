@@ -1,0 +1,62 @@
+export const pitch = {
+  brand: "Assetain",
+  tagline: "Universal Asset Management SaaS",
+  heroSubtitle:
+    "From schools to hospitals, offices to entire countries — Assetain lets anyone report, track, and fix physical assets with a single scan.",
+  problem: [
+    "Assets (projectors, fans, ACs, medical equipment, PCs, servers) break unexpectedly.",
+    "Reporting is manual: phone calls, emails, or paper requests.",
+    "Management cannot see who is responsible, what the status is, or when it will be fixed.",
+    "Multi-location organisations become chaotic to manage.",
+  ],
+  solution: [
+    "Attach a QR code to every physical asset.",
+    "Anyone scans the code (or types the asset ID) and submits a short issue form — no login needed.",
+    "Tickets route instantly to the right Branch Manager, who assigns a Technician.",
+    "All updates are visible in real time on a web dashboard.",
+  ],
+  benefits: [
+    "Faster reporting in seconds via QR scan.",
+    "Clear ownership and accountability per ticket.",
+    "Less downtime — issues reach the right technician immediately.",
+    "Lower costs through better maintenance planning.",
+    "Actionable data: failure frequency, MTTR, hotspots.",
+  ],
+  features: [
+    { title: "QR-code reporting", desc: "Scan or type an asset ID, fill a brief issue form." },
+    { title: "Role-based dashboards", desc: "Owner, Admin, Manager, Technician, Reporter — each sees only what they need." },
+    { title: "Live ticket status", desc: "Open → In-Progress → Resolved, with timestamps." },
+    { title: "Multi-tenant ready", desc: "Single-org MVP, then SaaS for many organisations." },
+    { title: "Responsive design", desc: "Works on desktop, tablet, and mobile browsers." },
+    { title: "Analytics (roadmap)", desc: "Failure frequency per asset, MTTR, heat-maps." },
+  ],
+  targetCustomers: [
+    "Schools and universities",
+    "Hospitals and clinics",
+    "Offices and corporate campuses",
+    "Factories, warehouses, and data centers",
+    "Government and country-level infrastructure",
+  ],
+  roles: [
+    { role: "Owner", permissions: "Full platform control, billing, admins." },
+    { role: "Admin", permissions: "All branches, invite managers/technicians." },
+    { role: "Manager", permissions: "Assigned branches, assets, ticket review, assign technicians." },
+    { role: "Technician", permissions: "Assigned tasks, status updates, resolution notes." },
+    { role: "Reporter / Guest", permissions: "Scan & report issues, view own ticket history." },
+  ],
+  roadmap: [
+    "MVP — client-side app with local persistence.",
+    "Phase 1 — Node backend + JSON storage for multi-device sync.",
+    "Phase 2 — Firebase/Supabase for real-time multi-tenant SaaS.",
+    "Phase 3 — Camera-based QR scanning (html5-qrcode).",
+    "Phase 4 — Secure auth (email/password or OAuth) + role-based API.",
+    "Phase 5 — Analytics dashboard & reporting.",
+  ],
+  businessModel: [
+    "SaaS subscription per organisation / location.",
+    "Tiered plans: Starter, Growth, Enterprise.",
+    "Add-ons: advanced analytics, SSO, SLA support.",
+  ],
+  ask: "We are seeking early adopters, beta testers, and investors who share our vision of a fully managed physical-asset ecosystem.",
+  contact: "hello@assetain.com",
+};
