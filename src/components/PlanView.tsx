@@ -8,13 +8,11 @@ function hasText(...parts: (string | undefined)[]) {
 function RoleTable({ rows }: { rows: RoleRow[] }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full table-auto border-collapse">
+      <table className="w-full table-auto border-collapse text-sm">
         <thead>
-          <tr className="bg-primary-100 dark:bg-primary-800">
-            <th className="border border-primary-300 p-2 text-left dark:border-primary-600">
-              Role
-            </th>
-            <th className="border border-primary-300 p-2 text-left dark:border-primary-600">
+          <tr className="bg-gray-100 dark:bg-white/10">
+            <th className="border border-gray-200 p-2 text-left dark:border-white/10">Role</th>
+            <th className="border border-gray-200 p-2 text-left dark:border-white/10">
               Permissions
             </th>
           </tr>
@@ -23,18 +21,12 @@ function RoleTable({ rows }: { rows: RoleRow[] }) {
           {rows.map((row, i) => (
             <tr
               key={`${row.role}-${i}`}
-              className={
-                i % 2 === 0
-                  ? "bg-primary-50/50 dark:bg-white/5"
-                  : "bg-white/60 dark:bg-white/10"
-              }
+              className={i % 2 === 0 ? "bg-gray-50/60 dark:bg-white/5" : "bg-white dark:bg-white/10"}
             >
-              <td className="border border-primary-300 p-2 dark:border-primary-600">
+              <td className="border border-gray-200 p-2 font-medium dark:border-white/10">
                 {row.role}
               </td>
-              <td className="border border-primary-300 p-2 dark:border-primary-600">
-                {row.permissions}
-              </td>
+              <td className="border border-gray-200 p-2 dark:border-white/10">{row.permissions}</td>
             </tr>
           ))}
         </tbody>
@@ -45,54 +37,28 @@ function RoleTable({ rows }: { rows: RoleRow[] }) {
 
 export default function PlanView({ content }: { content: PlanContent }) {
   const c = content;
-  const isEmpty =
-    !hasText(c.hero.title, c.overview.title, c.about.title) &&
-    !(c.features.items?.length || c.roadmap.items?.length || c.extraSections?.length);
-
-  if (isEmpty) {
-    return (
-      <main className="container mx-auto p-6 md:p-10">
-        <div className="rounded-xl border border-dashed border-primary-300/50 bg-white/40 p-10 text-center dark:border-white/20 dark:bg-white/5">
-          <h2 className="mb-2 text-2xl font-bold text-primary-700 dark:text-primary-100">
-            No plan data yet
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            MongoDB mein abhi content nahi hai. Neeche{" "}
-            <strong>AI Edit</strong> se add karo, ya{" "}
-            <code className="rounded bg-black/10 px-1 dark:bg-white/10">
-              npm run seed
-            </code>{" "}
-            chalao.
-          </p>
-        </div>
-      </main>
-    );
-  }
-
   return (
-    <main className="container mx-auto space-y-10 p-4 md:space-y-12 md:p-6">
+    <main className="container mx-auto space-y-8 px-4 py-8 md:space-y-10 md:px-6">
       {hasText(c.hero.title, c.hero.subtitle) && (
         <Section centered>
           {c.hero.title && (
-            <h2 className="mb-4 text-3xl font-extrabold text-primary-700 dark:text-primary-100 md:text-4xl">
+            <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl">
               {c.hero.title}
-            </h2>
+            </h1>
           )}
-          {c.hero.subtitle && (
-            <p className="mx-auto max-w-3xl text-lg">{c.hero.subtitle}</p>
-          )}
+          {c.hero.subtitle && <p className="mx-auto max-w-3xl text-lg text-gray-600 dark:text-gray-300">{c.hero.subtitle}</p>}
         </Section>
       )}
 
       {hasText(c.overview.title, c.overview.subtitle) && (
         <Section id="overview" centered>
           {c.overview.title && (
-            <h2 className="mb-4 text-3xl font-extrabold text-primary-700 dark:text-primary-100 md:text-4xl">
+            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-4xl">
               {c.overview.title}
             </h2>
           )}
           {c.overview.subtitle && (
-            <p className="mx-auto max-w-2xl text-lg">{c.overview.subtitle}</p>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">{c.overview.subtitle}</p>
           )}
         </Section>
       )}
@@ -100,9 +66,7 @@ export default function PlanView({ content }: { content: PlanContent }) {
       {(hasText(c.about.title) || c.about.paragraphs.length > 0) && (
         <Section title={c.about.title || undefined}>
           {c.about.paragraphs.map((p, i) => (
-            <p key={i} className="mb-3 last:mb-0">
-              {p}
-            </p>
+            <p key={i} className="mb-3 last:mb-0">{p}</p>
           ))}
         </Section>
       )}
@@ -120,9 +84,7 @@ export default function PlanView({ content }: { content: PlanContent }) {
       {(hasText(c.solution.title) || c.solution.paragraphs.length > 0) && (
         <Section id="solution" title={c.solution.title || undefined}>
           {c.solution.paragraphs.map((p, i) => (
-            <p key={i} className="mb-3 last:mb-0">
-              {p}
-            </p>
+            <p key={i} className="mb-3 last:mb-0">{p}</p>
           ))}
         </Section>
       )}
@@ -131,11 +93,8 @@ export default function PlanView({ content }: { content: PlanContent }) {
         <Section id="features" title={c.features.title || undefined}>
           <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {c.features.items.map((f, i) => (
-              <li
-                key={i}
-                className="rounded bg-primary-50/80 p-4 dark:bg-white/5"
-              >
-                <strong>{f.title}</strong> – {f.desc}
+              <li key={i} className="rounded-xl bg-gray-50 p-4 dark:bg-white/5">
+                <strong className="text-gray-900 dark:text-white">{f.title}</strong> – {f.desc}
               </li>
             ))}
           </ul>
@@ -161,15 +120,13 @@ export default function PlanView({ content }: { content: PlanContent }) {
       {hasText(c.joinUs.title, c.joinUs.text) && (
         <Section centered>
           {c.joinUs.title && (
-            <h2 className="mb-4 text-2xl font-semibold text-primary-700 dark:text-primary-100">
-              {c.joinUs.title}
-            </h2>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">{c.joinUs.title}</h2>
           )}
-          {c.joinUs.text && <p className="mb-4">{c.joinUs.text}</p>}
+          {c.joinUs.text && <p className="mb-4 text-gray-600 dark:text-gray-300">{c.joinUs.text}</p>}
           {c.joinUs.cta && (
             <a
               href={c.joinUs.ctaHref || "#"}
-              className="inline-block rounded bg-primary-600 px-6 py-2 font-medium text-white transition hover:bg-primary-500"
+              className="inline-block rounded-lg bg-blue-600 px-6 py-2 font-medium text-white transition hover:bg-blue-500"
             >
               {c.joinUs.cta}
             </a>
@@ -180,14 +137,12 @@ export default function PlanView({ content }: { content: PlanContent }) {
       {hasText(c.blueprintIntro.title, c.blueprintIntro.subtitle) && (
         <div id="blueprint" className="pt-4 text-center">
           {c.blueprintIntro.title && (
-            <h2 className="text-2xl font-bold text-primary-600 dark:text-primary-200 md:text-3xl">
+            <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 md:text-3xl">
               {c.blueprintIntro.title}
             </h2>
           )}
           {c.blueprintIntro.subtitle && (
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              {c.blueprintIntro.subtitle}
-            </p>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">{c.blueprintIntro.subtitle}</p>
           )}
         </div>
       )}
@@ -198,17 +153,13 @@ export default function PlanView({ content }: { content: PlanContent }) {
           {c.coreConcept.platformName && (
             <p className="mb-2">
               <strong>SaaS Platform Name:</strong>{" "}
-              <span className="text-primary-600 dark:text-primary-300">
-                {c.coreConcept.platformName}
-              </span>
+              <span className="text-blue-600 dark:text-blue-400">{c.coreConcept.platformName}</span>
             </p>
           )}
           {c.coreConcept.hierarchy && (
             <>
-              <p className="mb-2">
-                <strong>Hierarchy Structure:</strong>
-              </p>
-              <pre className="overflow-x-auto rounded bg-primary-50/80 p-4 text-sm dark:bg-white/5">
+              <p className="mb-2 font-semibold">Hierarchy Structure:</p>
+              <pre className="overflow-x-auto rounded-lg bg-gray-100 p-4 text-sm dark:bg-white/5">
                 {c.coreConcept.hierarchy}
               </pre>
             </>
@@ -246,11 +197,7 @@ export default function PlanView({ content }: { content: PlanContent }) {
               <strong>Scanning:</strong> {c.qrFlow.scanning}
             </p>
           )}
-          {c.qrFlow.optionsTitle && (
-            <p className="mb-3">
-              <strong>{c.qrFlow.optionsTitle}</strong>
-            </p>
-          )}
+          {c.qrFlow.optionsTitle && <p className="mb-3 font-semibold">{c.qrFlow.optionsTitle}</p>}
           {c.qrFlow.options.length > 0 && (
             <ul className="ml-4 list-inside list-disc space-y-1">
               {c.qrFlow.options.map((o, i) => (
@@ -292,15 +239,13 @@ export default function PlanView({ content }: { content: PlanContent }) {
       {hasText(c.nextSteps.title, c.nextSteps.text) && (
         <Section centered>
           {c.nextSteps.title && (
-            <h2 className="mb-4 text-2xl font-semibold text-primary-700 dark:text-primary-100">
-              {c.nextSteps.title}
-            </h2>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">{c.nextSteps.title}</h2>
           )}
-          {c.nextSteps.text && <p className="mb-4">{c.nextSteps.text}</p>}
+          {c.nextSteps.text && <p className="mb-4 text-gray-600 dark:text-gray-300">{c.nextSteps.text}</p>}
           {c.nextSteps.cta && (
             <a
               href={c.nextSteps.ctaHref || "#"}
-              className="inline-block rounded bg-primary-600 px-6 py-2 font-medium text-white transition hover:bg-primary-500"
+              className="inline-block rounded-lg bg-blue-600 px-6 py-2 font-medium text-white transition hover:bg-blue-500"
             >
               {c.nextSteps.cta}
             </a>

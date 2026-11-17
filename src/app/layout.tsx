@@ -14,24 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Assetain – Complete Startup Blueprint",
-  description:
-    "A complete plan for Assetain – universal asset-management SaaS for schools, hospitals, offices, and organisations everywhere.",
+  description: "A complete plan for Assetain – universal asset-management SaaS for schools, hospitals, offices, and organisations everywhere.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
-      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-gradient-to-br from-gray-50 via-primary-50 to-primary-100 text-gray-900 dark:from-primary-900 dark:via-primary-800 dark:to-primary-700 dark:text-gray-100">
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
