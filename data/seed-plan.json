@@ -34,21 +34,51 @@
   "features": {
     "title": "✨ Core Features",
     "items": [
-      { "title": "QR-code reporting", "desc": "Scan or type an asset ID, fill a brief issue form." },
-      { "title": "Role-based dashboards", "desc": "Admin, Supervisor, Technician, Reporter each see only what they need." },
-      { "title": "Live ticket status", "desc": "Open, In-Progress, Resolved, with timestamps." },
-      { "title": "Analytics (future)", "desc": "Failure frequency per asset, MTTR, heat-maps." },
-      { "title": "Multi-tenant ready", "desc": "Single-org MVP, later SaaS for many schools/hospitals." },
-      { "title": "Responsive design", "desc": "Works on desktop, tablet, and mobile browsers." }
+      {
+        "title": "QR-code reporting",
+        "desc": "Scan or type an asset ID, fill a brief issue form."
+      },
+      {
+        "title": "Role-based dashboards",
+        "desc": "Admin, Supervisor, Technician, Reporter each see only what they need."
+      },
+      {
+        "title": "Live ticket status",
+        "desc": "Open, In-Progress, Resolved, with timestamps."
+      },
+      {
+        "title": "Analytics (future)",
+        "desc": "Failure frequency per asset, MTTR, heat-maps."
+      },
+      {
+        "title": "Multi-tenant ready",
+        "desc": "Single-org MVP, later SaaS for many schools/hospitals."
+      },
+      {
+        "title": "Responsive design",
+        "desc": "Works on desktop, tablet, and mobile browsers."
+      }
     ]
   },
   "overviewRoles": {
     "title": "👥 Who Does What?",
     "rows": [
-      { "role": "Admin", "permissions": "Create users, assign roles, edit asset catalogue, view all tickets." },
-      { "role": "Supervisor / Manager", "permissions": "See tickets for their department, assign technicians, add notes." },
-      { "role": "Technician", "permissions": "Receive assigned tickets, update status, add resolution details." },
-      { "role": "Reporter (any employee)", "permissions": "Scan QR / enter ID, describe problem, view own ticket history." }
+      {
+        "role": "Admin",
+        "permissions": "Create users, assign roles, edit asset catalogue, view all tickets."
+      },
+      {
+        "role": "Supervisor / Manager",
+        "permissions": "See tickets for their department, assign technicians, add notes."
+      },
+      {
+        "role": "Technician",
+        "permissions": "Receive assigned tickets, update status, add resolution details."
+      },
+      {
+        "role": "Reporter (any employee)",
+        "permissions": "Scan QR / enter ID, describe problem, view own ticket history."
+      }
     ]
   },
   "roadmap": {
@@ -89,11 +119,26 @@
   "rbac": {
     "title": "3️⃣ Role Hierarchy & Access Control (RBAC)",
     "rows": [
-      { "role": "Owner (Creator/Boss)", "permissions": "Full platform control, add/remove Admins, manage subscription, direct DB changes." },
-      { "role": "Admin", "permissions": "Full access to all branches, can invite Managers & Technicians, but cannot add/remove other Admins." },
-      { "role": "Manager", "permissions": "Manage assigned branches, assets, and review issue reports. Can invite Technicians." },
-      { "role": "Technician", "permissions": "View only tasks assigned to them, update status, add resolution notes." },
-      { "role": "Guest / Unassigned", "permissions": "Newly invited user with no permissions until a role is granted." }
+      {
+        "role": "Owner (Creator/Boss)",
+        "permissions": "Full platform control, add/remove Admins, manage subscription, direct DB changes."
+      },
+      {
+        "role": "Admin",
+        "permissions": "Full access to all branches, can invite Managers & Technicians, but cannot add/remove other Admins."
+      },
+      {
+        "role": "Manager",
+        "permissions": "Manage assigned branches, assets, and review issue reports. Can invite Technicians."
+      },
+      {
+        "role": "Technician",
+        "permissions": "View only tasks assigned to them, update status, add resolution notes."
+      },
+      {
+        "role": "Guest / Unassigned",
+        "permissions": "Newly invited user with no permissions until a role is granted."
+      }
     ]
   },
   "qrFlow": {
@@ -121,5 +166,30 @@
     "cta": "Let's Keep Building",
     "ctaHref": "mailto:hello@assetain.com"
   },
-  "extraSections": []
+  "extraSections": [
+    {
+      "id": "benefits",
+      "title": "📈 How It Helps (Benefits)",
+      "body": "Assetain turns chaotic, manual asset reporting into a simple, trackable workflow.",
+      "listItems": [
+        "Faster reporting: scan a QR code or type an asset ID in seconds.",
+        "Clear ownership: every ticket has a responsible person and status.",
+        "Less downtime: issues reach the right technician immediately.",
+        "Lower costs: fewer lost assets and better maintenance planning.",
+        "Better decisions: data on failures, MTTR, and hotspots."
+      ]
+    },
+    {
+      "id": "target-audience",
+      "title": "🎯 Who Will Use It",
+      "body": "Anyone who manages or uses physical assets:",
+      "listItems": [
+        "Schools and universities",
+        "Hospitals and clinics",
+        "Offices and corporate campuses",
+        "Factories, warehouses, and data centers",
+        "Government and country-level infrastructure"
+      ]
+    }
+  ]
 }
